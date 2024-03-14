@@ -29,11 +29,10 @@ class MainScreen extends StatelessWidget {
       child: ElevatedButton.icon(
         icon: Icon(icon, color: Colors.white),
         label: Text(title),
-        onPressed: () {
-          // Acciones al presionar el botón
-        },
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.transparent,
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           side: BorderSide(color: Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

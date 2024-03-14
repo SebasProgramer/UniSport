@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // Asegúrate de importar la pantalla principal
+import 'login_screen.dart'; 
 
 void main() => runApp(MyApp());
 
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
   Widget _buildTextField(BuildContext context, String title, IconData icon) {
     return Container(
       margin: EdgeInsets.all(10),
-      width: 300, // Ancho del campo de texto
+      width: 300, 
       child: TextField(
         decoration: InputDecoration(
           labelText: title,
