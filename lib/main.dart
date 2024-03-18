@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'INICIO DE SESIÓN',
+              'INICIAR DE SESIÓN',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
             SizedBox(height: 20),
