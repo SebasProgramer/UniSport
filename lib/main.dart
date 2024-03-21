@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; 
+import 'login_screen.dart';
+import 'camara_screen.dart'; // Importa la pantalla CameraScreen
 
 void main() => runApp(MyApp());
 
@@ -17,7 +18,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  // Correo y contraseña predeterminados
+  final String defaultEmail = 'admin@gmail.com';
+  final String defaultPassword = '123456';
+
+  // Controladores para los campos de texto
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +41,13 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'INICIO DE SESIÓN',
+              'Bienvenidos a UniSport',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
             SizedBox(height: 20),
-            _buildTextField(context, 'Usuario', Icons.person),
-            _buildTextField(context, 'Contraseña', Icons.lock),
+            _buildTextField(context, 'Usuario', Icons.person, emailController),
+            _buildTextField(
+                context, 'Contraseña', Icons.lock, passwordController),
             _buildButton(context, 'INICIAR SESIÓN', Icons.login),
           ],
         ),
@@ -40,11 +55,15 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(BuildContext context, String title, IconData icon) {
+  Widget _buildTextField(BuildContext context, String title, IconData icon,
+      TextEditingController controller) {
     return Container(
       margin: EdgeInsets.all(10),
-      width: 300, 
+      width: 300,
       child: TextField(
+        controller: controller,
+        obscureText: title ==
+            'Contraseña', // Oculta el texto si es el campo de la contraseña
         decoration: InputDecoration(
           labelText: title,
           labelStyle: TextStyle(color: Colors.white),
@@ -70,10 +89,18 @@ class LoginScreen extends StatelessWidget {
         icon: Icon(icon, color: Colors.white),
         label: Text(title),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MainScreen()),
-          );
+          if (emailController.text == defaultEmail &&
+              passwordController.text == defaultPassword) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainScreen()),
+            );
+          } else {
+            // Muestra un mensaje de error si el correo o la contraseña son incorrectos
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Correo o contraseña incorrectos')),
+            );
+          }
         },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:camera/camera.dart';
+import 'camara_screen.dart';
+
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,22 +26,38 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(BuildContext context, String title, IconData icon) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: ElevatedButton.icon(
-        icon: Icon(icon, color: Colors.white),
-        label: Text(title),
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.transparent,
-          side: BorderSide(color: Colors.white),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+ Widget _buildButton(BuildContext context, String title, IconData icon) {
+  return Container(
+    margin: EdgeInsets.all(10),
+    child: ElevatedButton.icon(
+      icon: Icon(icon, color: Colors.white),
+      label: Text(title),
+      onPressed: () async {
+        if (title == 'REGISTRAR JUGADOR' || title == 'VERIFICAR JUGADOR') {
+          // Inicializa la cámara aquí
+          final cameras = await availableCameras();
+          final controller = CameraController(
+            cameras[0],
+            ResolutionPreset.medium,
+          );
+          await controller.initialize();
+
+          // Luego navega a la pantalla RegisterScreen
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CameraScreen()),
+          );
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        side: BorderSide(color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
