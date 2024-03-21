@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:camera/camera.dart';
+import 'camara_screen.dart';
+
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,21 @@ class MainScreen extends StatelessWidget {
       child: ElevatedButton.icon(
         icon: Icon(icon, color: Colors.white),
         label: Text(title),
-        onPressed: () {},
+        onPressed: () async {
+          // Inicializa la cámara aquí
+          final cameras = await availableCameras();
+          final controller = CameraController(
+            cameras[0],
+            ResolutionPreset.medium,
+          );
+          await controller.initialize();
+
+          // Luego navega a la pantalla RegisterScreen
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CameraScreen()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: Colors.transparent,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; 
+import 'login_screen.dart';
+import 'camara_screen.dart'; // Importa la pantalla CameraScreen
+
 
 void main() => runApp(MyApp());
 
@@ -27,7 +29,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'INICIAR DE SESIÓN',
+              'INICIO DE SESIÓN',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
             SizedBox(height: 20),
@@ -43,7 +45,7 @@ class LoginScreen extends StatelessWidget {
   Widget _buildTextField(BuildContext context, String title, IconData icon) {
     return Container(
       margin: EdgeInsets.all(10),
-      width: 300, 
+      width: 300,
       child: TextField(
         decoration: InputDecoration(
           labelText: title,
@@ -72,7 +74,7 @@ class LoginScreen extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MainScreen()),
+            MaterialPageRoute(builder: (context) => CameraScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
