@@ -26,13 +26,14 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(BuildContext context, String title, IconData icon) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: ElevatedButton.icon(
-        icon: Icon(icon, color: Colors.white),
-        label: Text(title),
-        onPressed: () async {
+ Widget _buildButton(BuildContext context, String title, IconData icon) {
+  return Container(
+    margin: EdgeInsets.all(10),
+    child: ElevatedButton.icon(
+      icon: Icon(icon, color: Colors.white),
+      label: Text(title),
+      onPressed: () async {
+        if (title == 'REGISTRAR JUGADOR' || title == 'VERIFICAR JUGADOR') {
           // Inicializa la cámara aquí
           final cameras = await availableCameras();
           final controller = CameraController(
@@ -46,16 +47,17 @@ class MainScreen extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => CameraScreen()),
           );
-        },
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.transparent,
-          side: BorderSide(color: Colors.white),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        side: BorderSide(color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
